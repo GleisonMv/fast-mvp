@@ -20,6 +20,6 @@ repositories {
 
 // At the module level
 dependencies {
-	implementation 'com.github.GleisonMv:fast-mvp:Tag'
+     implementation 'com.github.GleisonMv:fast-mvp:Tag'
 }
 ```
