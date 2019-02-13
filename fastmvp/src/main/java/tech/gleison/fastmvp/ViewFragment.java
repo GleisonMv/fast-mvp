@@ -32,29 +32,26 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 /**
- * Visualizador do Fragmento
+ * Fragment type viewer
  *
- * @param <Presenter> Apresentador
+ * @param <Presenter> Presenter
  * @author Gleison M. Vasconcelos
- * @version 1.0
+ * @version 1.0.4
  */
 public abstract class ViewFragment<Presenter extends PresenterFragment> extends Fragment {
 
-    /**
-     * Apresentador
-     */
+    //
+    // The Presenter
+    //
     public Presenter presenter;
 
-    /**
-     * Inicializa o View
-     */
     @SuppressWarnings("unchecked")
     public ViewFragment() {
         ParameterizedType type = (ParameterizedType) (getClass().getGenericSuperclass());
         if (type == null) return;
         try {
             Class<Presenter> aClass = (Class<Presenter>) type.getActualTypeArguments()[0];
-            presenter = aClass.newInstance();
+            this.presenter = aClass.newInstance();
         } catch (ClassCastException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -65,54 +62,55 @@ public abstract class ViewFragment<Presenter extends PresenterFragment> extends 
     }
 
     /**
-     * Layout que será definido no Fragmento
+     * Inflate the layout from R
      *
      * @return layout
      */
     @LayoutRes
-    public abstract int getViewLayout();
+    public abstract int layout();
+
 
     /**
-     * Método que deve ser usado, para trabalhar com os elementos que necessita da activity
+     * Called on activity is ready
      */
-    public abstract void onLoad();
+    public void ready() {
+        Log.d(getClass().getSimpleName(), "ready");
+    }
 
     /**
-     * Inicializa os componentes que utiliza do View
+     * Initialize the components used the view
      *
      * @param view View
      */
-    public void initialize(View view) {
-        Log.d(getClass().getSimpleName(), "Init");
+    public void readyView(View view) {
+        Log.d(getClass().getSimpleName(), "initialize");
     }
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle bundle) {
-        View view = inflater.inflate(getViewLayout(), container, false);
-        initialize(view);
+        View view = inflater.inflate(this.layout(), container, false);
+        this.readyView(view);
         return view;
     }
 
     @Override
     public void onActivityCreated(Bundle bundle) {
         super.onActivityCreated(bundle);
-        if (getActivity() != null) {
-            presenter.rootView = (ViewActivity) getActivity();
-            presenter.rootPresenter = presenter.rootView.presenter;
+        if (this.getActivity() != null) {
+            this.presenter.root = (ViewActivity) getActivity();
         }
     }
 
     @Override
     public void onStart() {
-        presenter.load();
-        onLoad();
+        this.presenter.load();
+        this.ready();
         super.onStart();
     }
 
     @Override
     public void onStop() {
-        presenter.stop();
+        this.presenter.stop();
         super.onStop();
     }
 }

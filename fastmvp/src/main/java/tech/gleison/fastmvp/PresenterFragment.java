@@ -22,38 +22,34 @@ package tech.gleison.fastmvp;
 import android.util.Log;
 
 /**
- * Apresentador para o Fragmento
+ * The presenter for fragment
  *
- * @param <View> Visualizador Activity
+ * @param <View>     View Fragment
+ * @param <Activity> View Activity
  * @author Gleison M. Vasconcelos
- * @version 1.0
+ * @version 1.0.4
  */
 public class PresenterFragment<View extends ViewFragment, Activity extends ViewActivity> {
 
-    /**
-     * Visualizador do tipo do Fragmento
-     */
+    //
+    // The View
+    //
     public View view;
 
-    /**
-     * Visualizador Activity
-     */
-    public ViewActivity rootView;
+    //
+    // The Activity View
+    //
+    public Activity root;
 
     /**
-     * Apresentador Activity
-     */
-    public PresenterActivity<Activity> rootPresenter;
-
-    /**
-     * Chamado no onStart do Fragmento
+     * Called onStart of Fragment
      */
     public void load() {
         Log.d(getClass().getSimpleName(), "Load");
     }
 
     /**
-     * Chamado no onStop do Fragmento
+     * Called onStop of Fragment
      */
     public void stop() {
         Log.d(getClass().getSimpleName(), "Stop");

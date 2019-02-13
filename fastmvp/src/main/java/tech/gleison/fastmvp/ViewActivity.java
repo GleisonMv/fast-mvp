@@ -19,34 +19,33 @@
  */
 package tech.gleison.fastmvp;
 
+import android.util.Log;
+
 import java.lang.reflect.ParameterizedType;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
- * Visualizador da activity
+ * Activity type viewer
  *
- * @param <Presenter> Apresentador
+ * @param <Presenter> Presenter
  * @author Gleison M. Vasconcelos
- * @version 1.0
+ * @version 1.0.4
  */
 public abstract class ViewActivity<Presenter extends PresenterActivity> extends AppCompatActivity {
 
-    /**
-     * Apresentador
-     */
+    //
+    // The Presenter
+    //
     public Presenter presenter;
 
-    /**
-     * Inicializa o View
-     */
     @SuppressWarnings("unchecked")
     public ViewActivity() {
         ParameterizedType type = (ParameterizedType) (getClass().getGenericSuperclass());
         if (type == null) return;
         try {
             Class<Presenter> aClass = (Class<Presenter>) type.getActualTypeArguments()[0];
-            presenter = aClass.newInstance();
+            this.presenter = aClass.newInstance();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
@@ -56,15 +55,23 @@ public abstract class ViewActivity<Presenter extends PresenterActivity> extends 
         }
     }
 
+    /**
+     * Method called after onStart
+     */
+    public void ready() {
+        Log.d(getClass().getSimpleName(), "ready");
+    }
+
     @Override
     public void onStart() {
-        presenter.load();
         super.onStart();
+        this.presenter.load();
+        this.ready();
     }
 
     @Override
     public void onStop() {
-        presenter.stop();
+        this.presenter.stop();
         super.onStop();
     }
 }
