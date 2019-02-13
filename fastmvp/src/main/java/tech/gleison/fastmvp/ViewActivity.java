@@ -46,6 +46,7 @@ public abstract class ViewActivity<Presenter extends PresenterActivity> extends 
         try {
             Class<Presenter> aClass = (Class<Presenter>) type.getActualTypeArguments()[0];
             this.presenter = aClass.newInstance();
+            this.presenter.view = this;
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {

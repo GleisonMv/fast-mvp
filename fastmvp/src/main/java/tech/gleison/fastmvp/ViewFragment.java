@@ -52,6 +52,7 @@ public abstract class ViewFragment<Presenter extends PresenterFragment> extends 
         try {
             Class<Presenter> aClass = (Class<Presenter>) type.getActualTypeArguments()[0];
             this.presenter = aClass.newInstance();
+            this.presenter.view = this;
         } catch (ClassCastException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
