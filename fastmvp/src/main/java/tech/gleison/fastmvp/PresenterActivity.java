@@ -22,28 +22,28 @@ package tech.gleison.fastmvp;
 import android.util.Log;
 
 /**
- * Apresentador para Activity
+ * The presenter for activity
  *
- * @param <View> Visualizador Activity
+ * @param <View> View Activity
  * @author Gleison M. Vasconcelos
  * @version 1.0
  */
 public abstract class PresenterActivity<View extends ViewActivity> {
 
-    /**
-     * Visualizador do tipo da Activity
-     */
+    //
+    // The View
+    //
     public View view;
 
     /**
-     * Chamado no onStart da activity
+     * Called onStart of Activity
      */
     public void load() {
         Log.d(getClass().getSimpleName(), "Load");
     }
 
     /**
-     * Chamado no onStop da Activity
+     * Called onStop of Activity
      */
     public void stop() {
         Log.d(getClass().getSimpleName(), "Stop");
