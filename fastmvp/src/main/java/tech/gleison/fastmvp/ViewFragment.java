@@ -103,10 +103,10 @@ public abstract class ViewFragment<Presenter extends PresenterFragment> extends 
     }
 
     @Override
-    public void onStart() {
+    public void onResume() {
+        super.onResume();
         this.presenter.load();
         this.ready();
-        super.onStart();
     }
 
     @Override

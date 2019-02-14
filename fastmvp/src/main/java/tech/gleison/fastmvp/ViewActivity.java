@@ -64,8 +64,8 @@ public abstract class ViewActivity<Presenter extends PresenterActivity> extends 
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         this.presenter.load();
         this.ready();
     }
