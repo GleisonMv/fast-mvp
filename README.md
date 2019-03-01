@@ -2,7 +2,7 @@
 # Fast MVP
 The fast library to implement mvp for android  
 
-[![](https://jitpack.io/v/GleisonMv/fast-mvp.svg)](https://jitpack.io/#GleisonMv/fast-mvp)
+[![](https://jitpack.io/v/GleisonMv/fast-mvp.svg?style=flat-square)](https://jitpack.io/#GleisonMv/fast-mvp)
 
  
  **Supports**
