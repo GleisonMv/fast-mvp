@@ -19,10 +19,12 @@
  */
 package tech.gleison.fastmvp;
 
+import android.os.Bundle;
 import android.util.Log;
 
 import java.lang.reflect.ParameterizedType;
 
+import androidx.annotation.CallSuper;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
@@ -57,19 +59,28 @@ public abstract class ViewActivity<Presenter extends PresenterActivity> extends 
     }
 
     /**
-     * Method called after onStart
+     * Method called after onResume
      */
-    public void ready() {
+    public void load() {
         Log.d(getClass().getSimpleName(), "ready");
     }
 
+    @CallSuper
+    @Override
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        this.presenter.init();
+    }
+
+    @CallSuper
     @Override
     public void onResume() {
         super.onResume();
         this.presenter.load();
-        this.ready();
+        this.load();
     }
 
+    @CallSuper
     @Override
     public void onStop() {
         this.presenter.stop();

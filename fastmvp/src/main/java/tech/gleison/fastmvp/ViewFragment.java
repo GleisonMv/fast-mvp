@@ -45,6 +45,11 @@ public abstract class ViewFragment<Presenter extends PresenterFragment> extends 
     //
     public Presenter presenter;
 
+    //
+    // is loaded ?
+    //
+    private boolean loaded = false;
+
     @SuppressWarnings("unchecked")
     public ViewFragment() {
         ParameterizedType type = (ParameterizedType) (getClass().getGenericSuperclass());
@@ -102,16 +107,27 @@ public abstract class ViewFragment<Presenter extends PresenterFragment> extends 
         }
     }
 
+    /**
+     * Check status of loading
+     *
+     * @return Boolean
+     */
+    public boolean isLoaded() {
+        return loaded;
+    }
+
     @Override
     public void onResume() {
         super.onResume();
         this.presenter.load();
         this.ready();
+        this.loaded = true;
     }
 
     @Override
     public void onStop() {
         this.presenter.stop();
+        this.loaded = false;
         super.onStop();
     }
 }

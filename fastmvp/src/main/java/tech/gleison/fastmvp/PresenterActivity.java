@@ -36,6 +36,13 @@ public abstract class PresenterActivity<View extends ViewActivity> {
     public View view;
 
     /**
+     * Called onCreate of Activity
+     */
+    public void init() {
+        Log.d(getClass().getSimpleName(), "init");
+    }
+
+    /**
      * Called onStart of Activity
      */
     public void load() {
