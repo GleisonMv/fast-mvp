@@ -21,6 +21,6 @@ repositories {
 // At the module level
 dependencies {
      implementation 'androidx.appcompat:appcompat:1.0.2'
-     implementation 'com.github.GleisonMv:fast-mvp:1.0.5'
+     implementation 'com.github.GleisonMv:fast-mvp:1.0.7'
 }
 ```
