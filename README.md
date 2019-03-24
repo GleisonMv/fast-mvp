@@ -20,6 +20,7 @@ repositories {
 
 // At the module level
 dependencies {
+     // use androidx package
      implementation 'androidx.appcompat:appcompat:1.0.2'
      implementation 'com.github.GleisonMv:fast-mvp:1.0.7'
 }
